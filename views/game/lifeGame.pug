@@ -1,0 +1,23 @@
+extends gameLayout.pug
+
+block game
+	.box
+		#gameFrame.cell-4.cell-m6.cell-s12
+			.box
+				canvas#canvas.canvas 天啦噜，您的浏览器版本不支持canvas标签！建议更换浏览器。
+	// 面板
+	.box
+		.cell-4.cell-m6.cell-s12.card
+			.box
+				#nextStep.button.cell-5 向前演化
+				#restart.button.cell-5 重新开始
+				select#select.select.cell-5
+					option(value='1') 概影
+					option(value='2') 烽火
+					option(value='3') 滑翔机
+					option(value='4') 飞船
+				#import.button.cell-5 导入模板
+
+append js
+	script(src='/game/js/lifeGame.js')
+	script(src='/game/js/lifeGameEvent.js')

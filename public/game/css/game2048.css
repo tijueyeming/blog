@@ -1,0 +1,16 @@
+#div2048 {
+  position: relative;
+  border: solid 1px #E8E3D4;
+  box-shadow: 0 0 5px rgba(198, 198, 198, 0.4);
+  background: #b8af9e;
+}
+
+.tile {
+  border-radius: 6px;
+  position: absolute;
+  text-align: center;
+  vertical-align: middle;
+  font-weight: 900;
+  font-family: DinLight, sans-serif;
+  background: #ccc0b2;
+}

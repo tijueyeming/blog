@@ -1,0 +1,161 @@
+* {
+	box-sizing: border-box;
+	font-family: DinRegular, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	background-color: #efefef;
+	font-size: 16px;
+	line-height: 1.5;
+	color: #474239;
+}
+
+@font-face {
+	font-family: DinLight;
+	src: url(../font/DINPro-Light.otf);
+}
+
+@font-face {
+	font-family: DinRegular;
+	src: url(../font/DINPro-Regular.otf);
+}
+
+@media (min-width: 0) {
+	.cell-0 {
+		flex: 0 0 0;
+	}
+	.cell-1 {
+		flex: 0 0 8.333333%;
+	}
+	.cell-2 {
+		flex: 0 0 16.666667%;
+	}
+	.cell-3 {
+		flex: 0 0 25%;
+	}
+	.cell-4 {
+		flex: 0 0 33.333333%;
+	}
+	.cell-5 {
+		flex: 0 0 41.666667%;
+	}
+	.cell-6 {
+		flex: 0 0 50%;
+	}
+	.cell-7 {
+		flex: 0 0 58.333333%;
+	}
+	.cell-8 {
+		flex: 0 0 66.666667%;
+	}
+	.cell-9 {
+		flex: 0 0 75%;
+	}
+	.cell-10 {
+		flex: 0 0 83.333333%;
+	}
+	.cell-11 {
+		flex: 0 0 91.666667%;
+	}
+	.cell-12 {
+		flex: 0 0 100%;
+	}
+}
+
+@media (max-width: 992px) {
+	.cell-m0 {
+		flex: 0 0 0;
+	}
+	.cell-m1 {
+		flex: 0 0 8.333333%;
+	}
+	.cell-m2 {
+		flex: 0 0 16.666667%;
+	}
+	.cell-m3 {
+		flex: 0 0 25%;
+	}
+	.cell-m4 {
+		flex: 0 0 33.333333%;
+	}
+	.cell-m5 {
+		flex: 0 0 41.666667%;
+	}
+	.cell-m6 {
+		flex: 0 0 50%;
+	}
+	.cell-m7 {
+		flex: 0 0 58.333333%;
+	}
+	.cell-m8 {
+		flex: 0 0 66.666667%;
+	}
+	.cell-m9 {
+		flex: 0 0 75%;
+	}
+	.cell-m10 {
+		flex: 0 0 83.333333%;
+	}
+	.cell-m11 {
+		flex: 0 0 91.666667%;
+	}
+	.cell-m12 {
+		flex: 0 0 100%;
+	}
+}
+
+@media (max-width: 768px) {
+	.cell-s0 {
+		flex: 0 0 0;
+	}
+	.cell-s1 {
+		flex: 0 0 8.333333%;
+	}
+	.cell-s2 {
+		flex: 0 0 16.666667%;
+	}
+	.cell-s3 {
+		flex: 0 0 25%;
+	}
+	.cell-s4 {
+		flex: 0 0 33.333333%;
+	}
+	.cell-s5 {
+		flex: 0 0 41.666667%;
+	}
+	.cell-s6 {
+		flex: 0 0 50%;
+	}
+	.cell-s7 {
+		flex: 0 0 58.333333%;
+	}
+	.cell-s8 {
+		flex: 0 0 66.666667%;
+	}
+	.cell-s9 {
+		flex: 0 0 75%;
+	}
+	.cell-s10 {
+		flex: 0 0 83.333333%;
+	}
+	.cell-s11 {
+		flex: 0 0 91.666667%;
+	}
+	.cell-s12 {
+		flex: 0 0 100%;
+	}
+}
+
+.box {
+	display: flex;
+	flex-flow: row wrap; 		/*主轴 换行*/
+	justify-content: center;	/*主轴上对齐*/
+	align-items: center;		/*交叉轴上对齐*/
+	align-content: center;		/*多根轴线对齐*/
+}
+
+.space-between {
+	justify-content: space-between;
+}

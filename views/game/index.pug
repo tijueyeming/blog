@@ -1,0 +1,40 @@
+extends layout.pug
+
+append body
+	if amount
+		each game in games
+			.box
+				.game.pointer.cell-4.cell-m6.cell-s12.card(gameId = game._id)
+					.box
+						.title.cell-12 #{game.title}
+						hr.hr.cell-12
+						.cell-8
+						.small.right.cell-4 #{game.moment}
+	else
+		.box
+			.cell-4.cell-m6.cell-s12.card
+				.box
+					.cell-12.red.center 暂无游戏
+	if number > 1
+		.box
+			#pagination.cell-4.cell-m6.cell-s12.card
+				.box
+					if page == 1
+						.cell-3
+					else
+						#previous.button2.cell-3 上一页
+					.cell-1
+					select#page.select.center.cell-4(page = page)
+						- for (var i = 1; i < number + 1; i++)
+							if i == page
+								option(value = i, selected = true) 第#{i}页
+							else
+								option(value = i) 第#{i}页
+					.cell-1
+					if page == number
+						.cell-3
+					else
+						#next.button2.cell-3 下一页
+
+append js
+	script(src='/game/js/index.js')

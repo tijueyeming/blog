@@ -1,0 +1,18 @@
+extends layout.pug
+
+append body
+	.box
+		#edit.cell-6.cell-m9.cell-s12.card(articleId = article._id)
+			.box
+				.cell-12 标题：
+				input#title.input.cell-12(type='text', value=article.title)
+				.cell-12 内容：
+				textarea#markdown.textarea.cell-12(rows='10').
+					#{article.markdown}
+				.cell-12 时间：
+				input#moment.input.cell-12(type='text', value=article.moment)
+				#submit.button.cell-4.cell-m8.cell-s12 发表
+				#delete.button.cell-4.cell-m8.cell-s12 删除
+
+append js
+	script(src='/admin/js/editArticle.js')
