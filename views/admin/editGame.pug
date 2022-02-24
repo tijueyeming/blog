@@ -5,14 +5,14 @@ append body
 		#edit.cell-6.cell-m9.cell-s12.card(gameId = game._id)
 			.box
 				.cell-12 标题：
-				input#title.input.cell-12(type='text', value=game.title)
+				input#title.input.cell-12(type='text' value=game.title)
 				.cell-12 代号：
-				input#code.input.cell-12(type='text', value=game.code)
+				input#code.input.cell-12(type='text' value=game.code)
 				.cell-12 手册
 				textarea#markdown.textarea.cell-12(rows='10').
 					#{game.markdown}
 				.cell-12 时间：
-				input#moment.input.cell-12(type='text', value=game.moment)
+				input#moment.input.cell-12(type='text' value=game.moment)
 				#submit.button.cell-4.cell-m8.cell-s12 发表
 				#delete.button.cell-4.cell-m8.cell-s12 删除
 

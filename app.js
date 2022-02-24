@@ -12,15 +12,15 @@ const app = new Koa()
 app.use(logger())
 
 app.use(session({
-  key: 'USER_SID'
+	key: 'USER_SID'
 }))
 
 app.use(staticCache(path.join(__dirname + '/public'), { dynamic: true }, {
-  maxAge: 365 * 24 * 60 * 60
+	maxAge: 365 * 24 * 60 * 60
 }))
 
 app.use(views(path.join(__dirname + '/views'), {
-  extension: 'pug'
+	extension: 'pug'
 }))
 
 app.use(bodyParser({

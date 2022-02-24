@@ -24,10 +24,10 @@ append body
 					else
 						#previous.button2.cell-3 上一页
 					.cell-1
-					select#page.select.center.cell-4(page = page)
+					select#page.select.center.cell-4(page = page title = 'page')
 						- for (var i = 1; i < number + 1; i++)
 							if i == page
-								option(value = i, selected = true) 第#{i}页
+								option(value = i selected = true) 第#{i}页
 							else
 								option(value = i) 第#{i}页
 					.cell-1
