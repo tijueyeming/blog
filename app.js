@@ -1,5 +1,7 @@
 const Koa = require('koa')
 const logger = require('koa-logger')
+const sslify = require('koa-sslify').default
+const helmet = require('koa-helmet')
 const config = require('./config/default.js')
 const session = require('koa-session-minimal')
 const path = require('path')
@@ -9,10 +11,11 @@ const bodyParser = require('koa-bodyparser')
 const router = require('./routers/router.js')
 const http = require('http')
 const https = require('https')
-const sslify = require('koa-sslify').default
 const app = new Koa()
 
 app.use(logger())
+
+app.use(helmet.noSniff())
 
 app.use(sslify())
 
@@ -42,4 +45,4 @@ https.createServer({key: config.key, cert: config.cert}, app.callback()).listen(
 http.createServer((req, res) => {
     res.writeHead(301, {'Location': 'https://tijueyeming.com'})
     res.end()
-}).listen(80)
+}).listen(3001)
