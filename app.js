@@ -7,6 +7,7 @@ const staticCache = require('koa-static-cache')
 const views = require('koa-views')
 const bodyParser = require('koa-bodyparser')
 const router = require('./routers/router.js')
+const http = require('http')
 const https = require('https')
 const sslify = require('koa-sslify').default
 const app = new Koa()
@@ -37,3 +38,8 @@ app.use(router.routes())
 https.createServer({key: config.key, cert: config.cert}, app.callback()).listen(config.port, () => {
 	console.log(`Web服务器开启成功，端口: ${config.port}`)
 })
+
+http.createServer((req, res) => {
+    res.writeHead(301, {'Location': 'https://tijueyeming.com'})
+    res.end()
+}).listen(80)
