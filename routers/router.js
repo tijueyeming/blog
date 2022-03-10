@@ -3,6 +3,7 @@ const home = require('../controllers/home.js')
 const article = require('../controllers/article.js')
 const game = require('../controllers/game.js')
 const admin = require('../controllers/admin.js')
+const AnGuiKaoShi = require('../controllers/AnGuiKaoShi.js')
 const c404 = require('../controllers/404.js')
 
 // 首页
@@ -42,6 +43,10 @@ koa_router.post('/admin/deleteGame', admin.postDeleteGame)
 koa_router.get('/admin/editGame/index/:page', admin.getGameIndex)
 koa_router.get('/admin/editGame/:id', admin.getEditGame)
 koa_router.post('/admin/editGame', admin.postEditGame)
+
+// 安规考试练习
+koa_router.get('/AnGuiKaoShi', AnGuiKaoShi.getHome)
+koa_router.post('/AnGuiKaoShi/load', AnGuiKaoShi.postLoad)
 
 // 404
 koa_router.get('/404', c404.get404)

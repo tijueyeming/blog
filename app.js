@@ -7,12 +7,17 @@ const staticCache = require('koa-static-cache')
 const views = require('koa-views')
 const bodyParser = require('koa-bodyparser')
 const router = require('./routers/router.js')
+const https = require('https')
+const sslify = require('koa-sslify').default
 const app = new Koa()
 
 app.use(logger())
 
+app.use(sslify())
+
 app.use(session({
-	key: 'USER_SID'
+	key: 'USER_SID',
+	secure:true
 }))
 
 app.use(staticCache(path.join(__dirname + '/public'), { dynamic: true }, {
@@ -29,5 +34,6 @@ app.use(bodyParser({
 
 app.use(router.routes())
 
-app.listen(config.port)
-console.log(`Web服务器开启成功，端口: ${config.port}`)
+https.createServer({key: config.key, cert: config.cert}, app.callback()).listen(config.port, () => {
+	console.log(`Web服务器开启成功，端口: ${config.port}`)
+})
