@@ -121,6 +121,7 @@
 	margin: 5px auto;
 	padding: 6px 12px;
 	height: 34px;
+	min-width:0;
 	color: #555;
 	background: #FFFFFF none;
 	border: 1px solid #b3a78f;

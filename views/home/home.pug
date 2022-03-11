@@ -10,14 +10,13 @@ html(lang='zh-CN')
 		link(rel='stylesheet' href='/home/css/style.css')
 
 	body
-		.header.pointer.box.space-between
-			#logo.cell-2.cell-m3.cell-s6
+		.header.box
+			#logo.logo.pointer.cell-2.cell-m3.cell-s4 鶗鴂夜鸣
+			.cell-7.cell-m5.cell-s0
+			.cell-3.cell-m4.cell-s8.space-between
 				.box
-					img.img.cell-2(src = '/home/img/avatar.png' alt = 'avatar')
-					.cell-1
-					.logo.cell-9 鶗鴂夜鸣
-			.cell-10.cell-m9.cell-s6
-
+					input#code.input.cell-5(placeholder='咒文' type='text')
+					#execute.button.cell-5 施咒
 		.box
 			.pointer.cell-4.cell-m6.cell-s12.card
 				.box
@@ -43,14 +42,14 @@ html(lang='zh-CN')
 				.box
 					.italic.center.blueViolet.cell-12 永远年轻，永远热泪盈眶。永远年轻，永远保持好奇。
 
-		.footer.pointer.box
-			#beian2.B3A78F.small.cell-3.cell-s6
+		.box
+			.footer.pointer.cell-4.cell-m6.cell-s12.card
 				.box
-					img.img.cell-1(src = '/home/img/beian.png' alt = 'beian')
-					.cell-11 浙公网安备 33059102000095号
-			#beian1.B3A78F.small.cell-3.cell-s6 浙ICP备20018387号-1
-			#copyright.B3A78F.small.cell-3.cell-s12 ©2022 tijueyeming.com
-			.cell-3.cell-s6
+					#copyright.B3A78F.small.cell-12 ©2022 tijueyeming.com
+					#beian1.B3A78F.small.cell-12 浙ICP备20018387号-1
+					#beian2.B3A78F.small.cell-12
+						.box
+							img.img.cell-1(src = '/home/img/beian.png' alt = 'beian')
+							.cell-11 浙公网安备 33059102000095号
 
-		script(src='/home/js/a.js')
 		script(src='/home/js/home.js')

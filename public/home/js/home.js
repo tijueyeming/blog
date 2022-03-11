@@ -1,19 +1,53 @@
-const logo = document.getElementById('logo')
-const hello = document.getElementById('hello')
 const article = document.getElementById('article')
 const game = document.getElementById('game')
-const copyright = document.getElementById("copyright")
-const beian1 = document.getElementById("beian1")
-const beian2 = document.getElementById("beian2")
+const copyright = document.getElementById('copyright')
+const beian1 = document.getElementById('beian1')
+const beian2 = document.getElementById('beian2')
+const code = document.getElementById('code')
+const execute = document.getElementById('execute')
 
-logo.onclick = () => window.location.href = '/'
+function magic() {
+	let v = code.value
+	if (v == 'article')
+		jump('/article/index/1')
+	else if (v == 'game')
+		jump('/game/index/1')
+	else if (v == 'admin')
+		jump('/admin')
+	else
+		alert('失败')
+}
 
-article.onclick = () => window.location.href = `/article/index/1`
+function jump(url) {
+	window.location.href = url
+}
 
-game.onclick = () => window.location.href = `/game/index/1`
+execute.onclick = function() {
+	magic() 
+}
 
-copyright.onclick = () => window.location.href = '/'
+article.onclick = function() {
+	jump('/article/index/1')
+}
 
-beian1.onclick = () => window.location.href = 'http://beian.miit.gov.cn'
+game.onclick = function() {
+	jump('/game/index/1')
+}
 
-beian2.onclick = () => window.location.href = 'http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33059102000095'
+copyright.onclick = function() {
+	jump('/')
+}
+
+beian1.onclick = function() {
+	jump('http://beian.miit.gov.cn')
+}
+
+beian2.onclick = function() {
+	jump('http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33059102000095')
+}
+
+document.onkeydown = function(event) {   
+	let e = event            
+	if(e && e.keyCode==13)
+		magic() 
+}
