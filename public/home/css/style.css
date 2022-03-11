@@ -83,7 +83,7 @@
 }
 /*按钮*/
 .button {
-	margin: 5px auto;
+	margin: 5px 0;
     height: 34px;
     color: #FFFFFF;
     background: #b3a78f none;
@@ -118,7 +118,7 @@
 }
 /*文本框*/
 .input {
-	margin: 5px auto;
+	margin: 5px 0;
 	padding: 6px 12px;
 	height: 34px;
 	min-width:0;
@@ -134,7 +134,7 @@
 }
 /*多行文本框*/
 .textarea {
-	margin: 5px auto;
+	margin: 5px 0;
 	padding: 6px 12px;
 	color: #555;
 	background: #FFFFFF none;
@@ -148,7 +148,7 @@
 }
 /*下拉选框*/
 .select {
-    margin: 5px auto;
+    margin: 5px 0;
     height: 34px;
     color: #333333;
     background: #FFFFFF none;
