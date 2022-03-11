@@ -1,21 +1,37 @@
-extends gameLayout.pug
+extends layout.pug
 
-block game
+block title
+	title #{title}
+
+append body
+	.box
+		.cell-4.cell-m6.cell-s12.card
+			.box
+				.title.center.cell-12 #{title}
 	// 面板
 	.box
 		.cell-4.cell-m6.cell-s12.card
 			.box
-				#restart.cell-12.button 重新开始
-				.cell-6.board
+				.cell-4.board
 					| 分数：
 					span#score 0
-				.cell-6.board
+				.cell-4.board
 					| 等级：
 					span#level 1
+				#restart.cell-4.button 重新开始
 	// 画布
 	.box
 		#gameFrame.cell-4.cell-m6.cell-s12
 			canvas#canvas.canvas 天啦噜，您的浏览器版本不支持canvas标签！建议更换浏览器。
+	// 手册
+	.box
+		.cell-4.cell-m6.cell-s12.card
+			.box
+				.word.cell-12
+					p 空格键暂停，R键重新开始，W/A/S/D或方向键控制方向。支持触屏操作。
+				hr.hr.cell-12
+				.cell-8
+				.small.right.cell-4 2020-05-13 14:41:25
 
 append js
 	script(src='/game/js/snake.js')

@@ -1,6 +1,13 @@
-extends gameLayout.pug
+extends layout.pug
 
-block game
+block title
+	title #{title}
+
+append body
+	.box
+		.cell-4.cell-m6.cell-s12.card
+			.box
+				.title.center.cell-12 #{title}
 	.box
 		.cell-4.cell-m6.cell-s12
 			.box
@@ -8,6 +15,15 @@ block game
 	.box
 		#gameFrame.cell-4.cell-m6.cell-s12
 			canvas#canvas.canvas 天啦噜，您的浏览器版本不支持canvas标签！建议更换浏览器。
+	.box
+		.cell-4.cell-m6.cell-s12.card
+			.box
+				.markdown.word.cell-12
+					p 不需要操作的游戏，老少皆宜！
+					p 可以用来发呆，效果极佳！每次运行都会随机生成不同颜色、大小、速度、方向的彩球。可以把这些小球想象成不同的角色，有的活泼，有的安静，有的好动，有的佛系，有时在划水，有的在发飙。
+				hr.hr.cell-12
+				.cell-8
+				.small.right.cell-4 2020-05-13 14:23:57
 
 append js
 	script(src='/game/js/colorBall.js')

@@ -1,6 +1,13 @@
-extends gameLayout.pug
+extends layout.pug
 
-block game
+block title
+	title #{title}
+
+append body
+	.box
+		.cell-4.cell-m6.cell-s12.card
+			.box
+				.title.center.cell-12 #{title}
 	// 面板
 	.box
 		.cell-4.cell-m6.cell-s12
@@ -10,6 +17,16 @@ block game
 	.box
 		#gameFrame.cell-4.cell-m6.cell-s12
 			canvas#canvas.canvas 天啦噜，您的浏览器版本不支持canvas标签！建议更换浏览器。
+	// 手册
+	.box
+		.cell-4.cell-m6.cell-s12.card
+			.box
+				.word.cell-12
+					p 点灯游戏！
+					p 点击任意方块可以使得自身及四周的方块改变状态，全部点亮所有方块后获胜。
+				hr.hr.cell-12
+				.cell-8
+				.small.right.cell-4 2020-06-12 17:43:00
 
 append js
 	script(src='/game/js/lightUp.js')

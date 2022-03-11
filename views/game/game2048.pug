@@ -1,12 +1,17 @@
-extends gameLayout.pug
+extends layout.pug
 
 block title
-	title #{game.title}
+	title #{title}
 
 append css
 	link(rel='stylesheet' href='/game/css/game2048.css')
 
-block game
+append body
+	.box
+		.cell-4.cell-m6.cell-s12.card
+			.box
+				.title.center.cell-12 #{title}
+	// 面板
 	.box
 		#header.cell-4.cell-m6.cell-s12.card
 			.box
@@ -14,6 +19,7 @@ block game
 					| 分数：
 					span#score 0
 				#restart.button.cell-4 重新开始
+	// 游戏
 	#game.box
 		#div2048.cell-4.cell-m6.cell-s12
 			#tile-0-0.tile
