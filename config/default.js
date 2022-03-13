@@ -5,6 +5,7 @@ const config = {
 	port: 3000,
 	// 数据库配置
 	mongoUrl: 'mongodb://root:Dcraki235711@tijueyeming.com:27017/blog?authSource=admin',
+	// ssl文件配置
 	key: fs.readFileSync('./ssl/ssl.key'),
 	cert: fs.readFileSync('./ssl/ssl.pem')
 }
