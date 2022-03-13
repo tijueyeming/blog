@@ -1,6 +1,8 @@
-const logo = document.getElementById('logo')
 const code = document.getElementById('code')
-const execute = document.getElementById('execute')
+
+function jump(url) {
+	window.location.href = url
+}
 
 function magic() {
 	let v = code.value
@@ -14,20 +16,9 @@ function magic() {
 		alert('施咒失败')
 }
 
-function jump(url) {
-	window.location.href = url
-}
-
-logo.onclick = function() {
-	jump('/')
-}
-
-execute.onclick = function() {
-	magic() 
-}
-
-document.onkeydown = function(event) {   
-	let e = event            
-	if(e && e.keyCode==13)
+function keyDown(event) {
+	if(event.keyCode==13)
 		magic() 
 }
+
+code.addEventListener('keydown', keyDown)

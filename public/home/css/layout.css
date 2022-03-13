@@ -1,6 +1,6 @@
 * {
 	box-sizing: border-box;
-	font-family: DinRegular, "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 body {
@@ -10,16 +10,6 @@ body {
 	font-size: 16px;
 	line-height: 1.5;
 	color: #474239;
-}
-
-@font-face {
-	font-family: DinLight;
-	src: url(../font/DINPro-Light.otf);
-}
-
-@font-face {
-	font-family: DinRegular;
-	src: url(../font/DINPro-Regular.otf);
 }
 
 @media (min-width: 0) {

@@ -13,12 +13,13 @@ html(lang='zh-CN')
 
 	body
 		.header.box
-			#logo.logo.pointer.cell-2.cell-m3.cell-s6 鶗鴂夜鸣
+			.size32.color1.center.pointer.hover.cell-2.cell-m3.cell-s6(onclick="jump('/')") 鶗鴂夜鸣
 			.cell-7.cell-m5.cell-s0
 			.cell-3.cell-m4.cell-s6
-				.box.space-between
+				.box
 					input#code.input.cell-5(placeholder='咒文' type='text')
-					#execute.button.cell-5 施咒
+					.cell-1
+					button.button.cell-5(onclick='magic()') 施咒
 		block body
 
 		block js

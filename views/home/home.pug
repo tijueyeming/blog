@@ -2,39 +2,35 @@ extends layout.pug
 
 append body
 	.box
-		.pointer.cell-4.cell-m6.cell-s12.card
+		.cell-4.cell-m6.cell-s12.card
 			.box
-				.welcome.cell-12 欢迎光临
+				.cell-12.height
+				.size36.color1.bold.center.pointer.hover.cell-12 欢迎光临
+				.cell-12.height
 				hr.hr.cell-12
 				.center.cell-12 人生若只如初见
 	.box
-		#article.pointer.cell-4.cell-m6.cell-s12.card
+		.pointer.cell-4.cell-m6.cell-s12.card(onclick="jump('/article/index/1')")
 			.box
 				.cell-12.height
-				img.img.cell-4(src='/home/img/articlesIcon.png' alt = 'articlesIcon')
-				.bigTitle.center.cell-4 日志
+				img.width.cell-2(src='/home/img/articlesIcon.png' alt = 'articlesIcon')
+				.size28.color1.center.hover.cell-4 日志
 				.cell-12.height
 	.box
-		#game.pointer.cell-4.cell-m6.cell-s12.card
+		.pointer.cell-4.cell-m6.cell-s12.card(onclick="jump('/game/index/1')")
 			.box
 				.cell-12.height
-				img.img.cell-4(src='/home/img/gamesIcon.png' alt = 'gamesIcon')
-				.bigTitle.center.cell-4 游戏
+				img.width.cell-2(src='/home/img/gamesIcon.png' alt = 'gamesIcon')
+				.size28.color1.center.hover.cell-4 游戏
 				.cell-12.height
 	.box
-		.pointer.cell-4.cell-m6.cell-s12.card
+		.cell-4.cell-m6.cell-s12.card
 			.box
 				.italic.center.blueViolet.cell-12 永远年轻，永远热泪盈眶。永远年轻，永远保持好奇。
 
 	.box
-		.footer.pointer.cell-4.cell-m6.cell-s12.card
+		.cell-4.cell-m6.cell-s12.card
 			.box
-				#copyright.B3A78F.small.cell-12 ©2022 tijueyeming.com
-				#beian1.B3A78F.small.cell-12 浙ICP备20018387号-1
-				#beian2.B3A78F.small.cell-12
-					.box
-						img.img.cell-1(src = '/home/img/beian.png' alt = 'beian')
-						.cell-11 浙公网安备 33059102000095号
-
-append js
-	script(src='/home/js/home.js')
+				.color2.small.pointer.cell-12(onclick="jump('/')") ©2022 tijueyeming.com
+				.color2.small.pointer.cell-6(onclick="jump('http://beian.miit.gov.cn')") 浙ICP备20018387号-1
+				.color2.small.pointer.cell-6(onclick="jump('http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33059102000095')") 浙公网安备 33059102000095号
