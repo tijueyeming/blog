@@ -24,7 +24,7 @@ append body
 					else
 						.button2.cell-3(onclick=`jump('/article/index/${page-1}')`) 上一页
 					.cell-1
-					select.select.center.cell-4(title='page' onchange=`jump('/article/index/'+this.options[page.selectedIndex].value)`)
+					select.select.center.cell-4(title='page' onchange=`jump('/article/index/'+this.options[this.selectedIndex].value)`)
 						- for (var i = 1; i < number + 1; i++)
 							if i == page
 								option(value = i selected = true) 第#{i}页
