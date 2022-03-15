@@ -236,7 +236,7 @@ function touchstart(e) {
 	startY = e.touches[0].pageY
 }
 
-function ontouchmove(e) {
+function touchmove(e) {
 	e.preventDefault()
 	endX = e.touches[0].pageX
 	endY = e.touches[0].pageY
@@ -264,8 +264,11 @@ function ontouchmove(e) {
 	}
 }
 
-function ontouchend(e) {
+function touchend(e) {
 	flag = 0
 }
 
 window.addEventListener('keydown', keyDown)
+gameFrame.addEventListener('touchstart', touchstart)
+gameFrame.addEventListener('touchmove', touchmove)
+gameFrame.addEventListener('touchend', touchend)
