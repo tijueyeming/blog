@@ -1,14 +1,12 @@
-/*规划布局*/
-var gameFrame = document.getElementById('gameFrame')
-var width = Math.floor(gameFrame.clientWidth / 10) * 10
-var canvas = document.getElementById('canvas')
-var ctx = canvas.getContext('2d')
+const gameFrame = document.getElementById('gameFrame')
+const width = Math.floor(gameFrame.clientWidth / 10) * 10
+const canvas = document.getElementById('canvas')
 canvas.width = width
 canvas.height = width
+const ctx = canvas.getContext('2d')
 
 /*方块*/
 class Tile {
-
 	constructor(x, y, v) {
 		this.x = x
 		this.y = y
@@ -40,7 +38,6 @@ class Tile {
 
 /*房间*/
 class Game {
-
 	constructor() {
 		this.tile = []
 	}
@@ -111,9 +108,27 @@ class Game {
 		ctx.fillStyle = gradient
 		ctx.fillText('你赢了', width / 2, width / 2)
 	}
-
 }
 
-/*开始游戏*/
+// 开始游戏
 var game = new Game()
 game.init()
+
+// 事件
+function mousedown(e) {
+	let x = Math.floor((e.clientX - canvas.getBoundingClientRect().left) / (width / 10))
+	let y = Math.floor((e.clientY - canvas.getBoundingClientRect().top) / (width / 10))
+	console.log('点击坐标: ' + x + '-' + y)
+	game.lightUp(x, y)
+}
+
+function touchstart(e) {
+	e.preventDefault()
+	let x = Math.floor((e.touches[0].clientX - canvas.getBoundingClientRect().left) / (width / 10))
+	let y = Math.floor((e.touches[0].clientY - canvas.getBoundingClientRect().top) / (width / 10))
+	console.log('点击坐标: ' + x + '-' + y)
+	game.lightUp(x, y)
+}
+
+gameFrame.addEventListener('mousedown', mousedown)
+gameFrame.addEventListener('touchstart', touchstart)

@@ -4,7 +4,7 @@ append body
 	if amount
 		each article in articles
 			.box
-				.article.pointer.cell-4.cell-m6.cell-s12.card(articleId = article._id)
+				.pointer.cell-4.cell-m6.cell-s12.card(onclick=`jump('/admin/editArticle/${article._id}')`)
 					.box
 						.big.bold.cell-12 #{article.title}
 						hr.hr.cell-12
@@ -17,14 +17,14 @@ append body
 					.cell-12.red.center 暂无文章
 	if number > 1
 		.box
-			#pagination.cell-4.cell-m6.cell-s12.card
+			.cell-4.cell-m6.cell-s12.card
 				.box
 					if page == 1
 						.cell-3
 					else
-						#previous.button2.cell-3 上一页
+						button.button2.cell-3(onclick=`jump('/admin/editArticle/index/${page-1}')`) 上一页
 					.cell-1
-					select#page.select.center.cell-4(title = 'page' page = page)
+					select.select.center.cell-4(title='page' onchange=`jump('/admin/editArticle/index/'+(this.selectedIndex+1))`)
 						- for (var i = 1; i < number + 1; i++)
 							if i == page
 								option(value = i selected = true) 第#{i}页
@@ -34,7 +34,4 @@ append body
 					if page == number
 						.cell-3
 					else
-						#next.button2.cell-3 下一页
-
-append js
-	script(src='/admin/js/articleIndex.js')
+						button.button2.cell-3(onclick=`jump('/admin/editArticle/index/${page+1}')`) 下一页

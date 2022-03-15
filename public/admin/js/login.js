@@ -1,33 +1,30 @@
-const name = document.getElementById('name')
-const pwd = document.getElementById('password')
-const sm = document.getElementById('submit')
+const uName = document.getElementById('name')
+const uPassword = document.getElementById('password')
 
-window.onkeydown = e => {
-	switch (e.keyCode) {
-		case 13:
-			sm.click()
-			break
-	}
-}
-
-sm.onclick = () => {
-    if (name.value == '' || pwd.value == '')
+function postLogin() {
+    if (uName.value == '' || uPassword.value == '')
 		alert('请输入用户名或密码')
 	else {
 		let xhttp = new XMLHttpRequest()
 		xhttp.onreadystatechange = () => {
 			if (xhttp.readyState == 4) {
 				let res = JSON.parse(xhttp.response)
-				if (res.code == 200) {
-					sm.innerHTML = res.message
-					setTimeout(() => window.location.href = "/admin", 1000)
-				}
+				if (res.code == 200)
+					jump('/admin')
 				else if (res.code == 500)
 					alert(res.message)
 			}
 		}
 		xhttp.open('POST', '/admin/login', true)
 		xhttp.setRequestHeader('content-type','application/x-www-form-urlencoded')
-		xhttp.send(`name=${name.value}&pwd=${pwd.value}`)
+		xhttp.send(`uName=${uName.value}&uPassword=${uPassword.value}`)
 	}
 }
+
+function keyDown(event) {
+	if(event.keyCode==13)
+		postLogin() 
+}
+
+uName.addEventListener('keydown', keyDown)
+uPassword.addEventListener('keydown', keyDown)

@@ -8,7 +8,7 @@ append body
 				input#title.input.cell-12(placeholder='标题' type='text')
 				.cell-12 内容：
 				textarea#markdown.textarea.cell-12(placeholder='内容' rows='10')
-				#submit.button.cell-4.cell-m8.cell-s12 发表
+				.button.cell-4.cell-m8.cell-s12(onclick='postArticle()') 发表
 
 append js
 	script(src='/admin/js/createArticle.js')

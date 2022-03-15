@@ -11,7 +11,7 @@ append body
 	.box
 		.cell-4.cell-m6.cell-s12
 			.box
-				#restart.button.cell-12 重新开始
+				button.button.cell-12(onclick='game.start()') 重新开始
 	.box
 		#gameFrame.cell-4.cell-m6.cell-s12
 			canvas#canvas.canvas 天啦噜，您的浏览器版本不支持canvas标签！建议更换浏览器。
@@ -27,4 +27,3 @@ append body
 
 append js
 	script(src='/game/js/colorBall.js')
-	script(src='/game/js/colorBallEvent.js')

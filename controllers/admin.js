@@ -22,10 +22,10 @@ async function getLogin(ctx) {
 }
 async function postLogin(ctx) {
 	console.log(`请求: ${JSON.stringify(ctx.request.body)}`)
-	let {name, pwd} = ctx.request.body
-	let user = await userModel.findUserByName(name)
+	let {uName, uPassword} = ctx.request.body
+	let user = await userModel.findUserByName(uName)
 	if (user) {
-		if (md5(pwd) === user.pwd) {
+		if (md5(uPassword) === user.uPassword) {
 			ctx.session = {id: user._id}
 			ctx.body = {
 				code: 200,

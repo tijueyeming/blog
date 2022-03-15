@@ -17,14 +17,16 @@ append body
 	.box
 		.cell-4.cell-m6.cell-s12.card
 			.box.space-between
-				#nextStep.button.cell-5 向前演化
-				#restart.button.cell-5 重新开始
-				select#select.select.cell-5
+				button.button.cell-6(onclick='game.evolution()') 向前演化
+				button.button.cell-6(onclick='game.init()') 重新开始
+				.right.cell-6 导入模版：
+				select.select.cell-6(onchange='game.importTemplate(this.selectedIndex)')
 					option(value='1') 概影
 					option(value='2') 烽火
 					option(value='3') 滑翔机
 					option(value='4') 飞船
-				#import.button.cell-5 导入模板
+					option(value='5' selected='true')
+				.cell-7
 	// 手册
 	.box
 		.cell-4.cell-m6.cell-s12.card
@@ -43,4 +45,3 @@ append body
 
 append js
 	script(src='/game/js/lifeGame.js')
-	script(src='/game/js/lifeGameEvent.js')

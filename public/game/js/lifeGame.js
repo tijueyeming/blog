@@ -1,11 +1,11 @@
-/*规划布局*/
+const gameFrame = document.getElementById('gameFrame')
 const canvas = document.getElementById('canvas')
-const width = Math.floor(document.getElementById('gameFrame').clientWidth / 40) * 40
+const width = Math.floor(gameFrame.clientWidth / 40) * 40
 canvas.width = width
 canvas.height = width
 const ctx = canvas.getContext('2d')
 
-/*细胞*/
+// 细胞
 class Cell {
 
 	constructor(x, y, alive) {
@@ -37,9 +37,8 @@ class Cell {
 	}
 }
 
-/*生命游戏*/
+// 生命游戏
 class LifeGame {
-
 	constructor() {
 		this.cells = null
 	}
@@ -120,5 +119,6 @@ class LifeGame {
 	}
 }
 
+// 开始游戏
 var game = new LifeGame()
 game.start()

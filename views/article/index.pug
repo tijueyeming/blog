@@ -22,9 +22,9 @@ append body
 					if page == 1
 						.cell-3
 					else
-						.button2.cell-3(onclick=`jump('/article/index/${page-1}')`) 上一页
+						button.button2.cell-3(onclick=`jump('/article/index/${page-1}')`) 上一页
 					.cell-1
-					select.select.center.cell-4(title='page' onchange=`jump('/article/index/'+this.options[this.selectedIndex].value)`)
+					select.select.center.cell-4(title='page' onchange=`jump('/article/index/'+(this.selectedIndex+1))`)
 						- for (var i = 1; i < number + 1; i++)
 							if i == page
 								option(value = i selected = true) 第#{i}页
@@ -34,4 +34,4 @@ append body
 					if page == number
 						.cell-3
 					else
-						.button2.cell-3(onclick=`jump('/article/index/${page+1}')`) 下一页
+						button.button2.cell-3(onclick=`jump('/article/index/${page+1}')`) 下一页

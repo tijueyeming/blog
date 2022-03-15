@@ -3,7 +3,6 @@ const width = Math.floor(gameFrame.clientWidth)
 const canvas = document.getElementById("canvas")
 canvas.width = width
 canvas.height = width
-
 const ctx = canvas.getContext('2d')
 
 class Ball {

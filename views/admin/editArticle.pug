@@ -11,8 +11,8 @@ append body
 					#{article.markdown}
 				.cell-12 时间：
 				input#moment.input.cell-12(type='text' value=article.moment)
-				#submit.button.cell-4.cell-m8.cell-s12 发表
-				#delete.button.cell-4.cell-m8.cell-s12 删除
+				button.button.cell-4.cell-m8.cell-s12(onclick='postArticle()') 发表
+				button.button.cell-4.cell-m8.cell-s12(onclick='deleteArticle()') 删除
 
 append js
 	script(src='/admin/js/editArticle.js')

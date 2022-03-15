@@ -18,7 +18,7 @@ append body
 				.cell-4.board
 					| 等级：
 					span#level 1
-				#restart.cell-4.button 重新开始
+				button.cell-4.button(onclick='game.restart()') 重新开始
 	// 画布
 	.box
 		#gameFrame.cell-4.cell-m6.cell-s12
@@ -35,4 +35,3 @@ append body
 
 append js
 	script(src='/game/js/snake.js')
-	script(src='/game/js/snakeEvent.js')

@@ -4,7 +4,7 @@ append body
 	if amount
 		each game in games
 			.box
-				.game.pointer.cell-4.cell-m6.cell-s12.card(gameId = game._id)
+				.pointer.cell-4.cell-m6.cell-s12.card(onclick=`jump('/game/${game._id}')`)
 					.box
 						.big.bold.cell-12 #{game.title}
 	else
@@ -14,14 +14,14 @@ append body
 					.cell-12.red.center 暂无游戏
 	if number > 1
 		.box
-			#pagination.cell-4.cell-m6.cell-s12.card
+			.cell-4.cell-m6.cell-s12.card
 				.box
 					if page == 1
 						.cell-3
 					else
-						#previous.button2.cell-3 上一页
+						button.button2.cell-3(onclick=`jump('/game/index/${page-1}')`) 上一页
 					.cell-1
-					select#page.select.center.cell-4(title = 'page' page = page)
+					select.select.center.cell-4(title='page' onchange=`jump('/game/index/'+(this.selectedIndex+1))`)
 						- for (var i = 1; i < number + 1; i++)
 							if i == page
 								option(value = i selected = true) 第#{i}页
@@ -31,7 +31,4 @@ append body
 					if page == number
 						.cell-3
 					else
-						#next.button2.cell-3 下一页
-
-append js
-	script(src='/game/js/index.js')
+						button.button2.cell-3(onclick=`jump('/game/index/${page+1}')`) 下一页

@@ -12,7 +12,7 @@ append body
 	.box
 		.cell-4.cell-m6.cell-s12
 			.box
-				#restart.cell-12.button 重新开始
+				button.cell-12.button(onclick='game.init()') 重新开始
 	// 画布
 	.box
 		#gameFrame.cell-4.cell-m6.cell-s12
@@ -30,4 +30,3 @@ append body
 
 append js
 	script(src='/game/js/lightUp.js')
-	script(src='/game/js/lightUpEvent.js')
