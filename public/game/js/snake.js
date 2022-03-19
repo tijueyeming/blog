@@ -227,8 +227,6 @@ function keyDown(e) {
 
 var startX = 0
 var startY = 0
-var endX = 0
-var endY = 0
 var flag = 0
 
 function touchstart(e) {
@@ -238,8 +236,8 @@ function touchstart(e) {
 
 function touchmove(e) {
 	e.preventDefault()
-	endX = e.touches[0].pageX
-	endY = e.touches[0].pageY
+	let endX = e.touches[0].pageX
+	let endY = e.touches[0].pageY
 	let deltaX = endX - startX
 	let deltaY = endY - startY
 	if (flag == 1 || (Math.abs(deltaX) < 0.03 * width && Math.abs(deltaY) < 0.03 * width))
