@@ -46,7 +46,7 @@ class LifeGame {
 		for (let i = 0; i < 42; i++) {
 			this.cells[i] = []
 			for (let j = 0; j < 42; j++) {
-				this.cells[i][j] = new Cell(i, j, this.width / 40 0)
+				this.cells[i][j] = new Cell(i, j, this.width / 40, 0)
 			}
 		}
 		for (let i = 1; i < 41; i++) {
