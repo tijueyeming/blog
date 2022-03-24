@@ -52,20 +52,10 @@ class Game {
 		this.ctx = canvas.getContext('2d')
 		this.cacheCanvas = document.createElement("canvas")
 		this.cacheCtx = this.cacheCanvas.getContext("2d")
+		this.init()
 	}
 	// 初始化
 	init() {
-		let x = 0
-		let y = 0
-		let dx = 0
-		let dy = 0
-		for (let i = 0; i < 100; i++) {
-			x = Math.floor(Math.random() * this.width)
-			y = Math.floor(Math.random() * this.width)
-			dx = Math.floor(Math.random() * 21) - 10
-			dy = Math.floor(Math.random() * 21) - 10
-			this.balls[i] = new Ball(x, y, dx, dy)
-		}
 		this.canvas.width = this.width
 		this.canvas.height = this.width
 		this.cacheCanvas.width = this.width
@@ -87,8 +77,18 @@ class Game {
 		}
 	}
 	start() {
+		let x = 0
+		let y = 0
+		let dx = 0
+		let dy = 0
+		for (let i = 0; i < 100; i++) {
+			x = Math.floor(Math.random() * this.width)
+			y = Math.floor(Math.random() * this.width)
+			dx = Math.floor(Math.random() * 21) - 10
+			dy = Math.floor(Math.random() * 21) - 10
+			this.balls[i] = new Ball(x, y, dx, dy)
+		}
 		clearInterval(this.loop)
-		this.init()
 		this.loop = setInterval( () => this.update(), 1000/60 )
 	}
 }
