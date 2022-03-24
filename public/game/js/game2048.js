@@ -1,23 +1,18 @@
-const gameFrame = document.getElementById('gameFrame')
-const width = Math.floor(gameFrame.clientWidth / 25) * 25
-const canvas = document.getElementById('canvas')
-canvas.width = width
-canvas.height = width
-const ctx = canvas.getContext('2d')
-
+// 背景
 class Background {
-	constructor() {
+	constructor(width) {
+		this.width = width
 		this.cacheCanvas = document.createElement('canvas')
 		this.cacheCtx = this.cacheCanvas.getContext('2d')
 		this.init()
 	}
 	// 初始化
 	init() {
-		let v = width / 25
-		this.cacheCanvas.width = width
-		this.cacheCanvas.height = width
+		let v = this.width / 25
+		this.cacheCanvas.width = this.width
+		this.cacheCanvas.height = this.width
 		this.cacheCtx.fillStyle = '#b8af9e'
-		this.cacheCtx.fillRect(0, 0, width, width)
+		this.cacheCtx.fillRect(0, 0, this.width, this.width)
 		let cache = this.cache()
 		for (let i=0; i<7; i++) {
 			for (let j=0; j<7; j++) {
@@ -27,7 +22,7 @@ class Background {
 	}
 	// 单个方块缓存
 	cache() {
-		let v = width / 25
+		let v = this.width / 25
 		let cacheCanvas = document.createElement('canvas')
 		let cacheCtx = cacheCanvas.getContext('2d')
 		cacheCanvas.width = 5 * v
@@ -52,43 +47,55 @@ class Background {
 	}
 	// 更新局部
 	updateRect(ctx, x, y) {
-		let v = width / 5
+		let v = this.width / 5
 		ctx.drawImage(this.cacheCanvas, x, y, v, v, x, y, v, v)
 	}
 }
-
+// 游戏
 class Game {
-	constructor() {
-		this.background = new Background()
+	constructor(canvas, width) {
+		this.background = new Background(width)
 		this.num = []
-		this.flag = []
+		this.numFlag = []
 		this.gameOver = false
 		this.loop = null
+		this.width = width
+		this.canvas = canvas
+		this.ctx = canvas.getContext('2d')
 		this.cacheCanvas = document.createElement('canvas')
 		this.cacheCtx = this.cacheCanvas.getContext('2d')
+		this.init()
+		// 事件
+		this.startX = 0
+		this.startY = 0
+		this.flag = 0
 	}
 	// 初始化
 	init() {
-		for (let i = 0; i < 4; i++) {
-			this.num[i] = []
-			this.flag[i] = []
-			for (let j = 0; j < 4; j++) {
-				this.num[i][j] = 0
-				this.flag[i][j] = false
-			}
-		}
-		this.gameOver = false
-		this.cacheCanvas.width = width
-		this.cacheCanvas.height = width
-		this.cacheCtx.clearRect(0, 0, width, width)
+		this.canvas.width = this.width
+		this.canvas.height = this.width
+		this.cacheCanvas.width = this.width
+		this.cacheCanvas.height = this.width
+		window.addEventListener('keydown', this.keyDown.bind(this))
+		this.canvas.addEventListener('touchstart', this.touchstart.bind(this))
+		this.canvas.addEventListener('touchmove', this.touchmove.bind(this))
+		this.canvas.addEventListener('touchend', this.touchend.bind(this))
 	}
 	// 开始游戏
 	start() {
 		clearInterval(this.loop)
+		for (let i = 0; i < 4; i++) {
+			this.num[i] = []
+			this.numFlag[i] = []
+			for (let j = 0; j < 4; j++) {
+				this.num[i][j] = 0
+				this.numFlag[i][j] = false
+			}
+		}
+		this.gameOver = false
 		this.loop = setInterval(function() {
-			ctx.drawImage(this.cacheCanvas, 0, 0)
+			this.ctx.drawImage(this.cacheCanvas, 0, 0)
 		}.bind(this), 1000/60)
-		this.init()
 		this.background.show(this.cacheCtx)
 		this.addNum()
 		this.addNum()
@@ -114,11 +121,6 @@ class Game {
 		this.isGameOver()
 		return true
 	}
-	// 更新画面
-	update() {
-		
-		this.loop = setInterval( () => this.update(), 1000/60 )
-	}
 	// 移动
 	moveUp() {
 		let moved = false
@@ -135,11 +137,11 @@ class Game {
 							this.animeB(i, j, i, k, this.num[i][k])
 							moved = true
 							break
-						} else if (this.num[i][k] == this.num[i][j] && this.canMoveInCol(i, k, j) && !this.flag[i][k]) {
+						} else if (this.num[i][k] == this.num[i][j] && this.canMoveInCol(i, k, j) && !this.numFlag[i][k]) {
 							//showMove(i, j, i, k)
 							this.num[i][k] = this.num[i][j] * 2
 							this.num[i][j] = 0
-							this.flag[i][k] = true
+							this.numFlag[i][k] = true
 							this.animeB(i, j, i, k, this.num[i][k] / 2)
 							moved = true
 							break
@@ -166,10 +168,10 @@ class Game {
 							this.animeB(i, j, i, k, this.num[i][k])
 							moved = true
 							break
-						} else if (this.num[i][k] == this.num[i][j] && this.canMoveInCol(i, j, k) && !this.flag[i][k]) {
+						} else if (this.num[i][k] == this.num[i][j] && this.canMoveInCol(i, j, k) && !this.numFlag[i][k]) {
 							this.num[i][k] = this.num[i][j] * 2
 							this.num[i][j] = 0
-							this.flag[i][k] = true
+							this.numFlag[i][k] = true
 							this.animeB(i, j, i, k, this.num[i][k] / 2)
 							moved = true
 							break
@@ -196,10 +198,10 @@ class Game {
 							this.animeB(i, j, k, j, this.num[k][j])
 							moved = true
 							break
-						} else if (this.num[k][j] == this.num[i][j] && this.canMoveInRow(j, k, i) && !this.flag[k][j]) {
+						} else if (this.num[k][j] == this.num[i][j] && this.canMoveInRow(j, k, i) && !this.numFlag[k][j]) {
 							this.num[k][j] = this.num[i][j] * 2
 							this.num[i][j] = 0
-							this.flag[k][j] = true
+							this.numFlag[k][j] = true
 							this.animeB(i, j, k, j, this.num[k][j] / 2)
 							moved = true
 							break
@@ -226,10 +228,10 @@ class Game {
 							this.animeB(i, j, k, j, this.num[k][j])
 							moved = true
 							break
-						} else if (this.num[k][j] == this.num[i][j] && this.canMoveInRow(j, i, k) && !this.flag[k][j]) {
+						} else if (this.num[k][j] == this.num[i][j] && this.canMoveInRow(j, i, k) && !this.numFlag[k][j]) {
 							this.num[k][j] = this.num[i][j] * 2
 							this.num[i][j] = 0
-							this.flag[k][j] = true
+							this.numFlag[k][j] = true
 							this.animeB(i, j, k, j, this.num[k][j] / 2)
 							moved = true
 							break
@@ -245,7 +247,7 @@ class Game {
 	clearFlag() {
 		for(let i=0;i<4;i++)
 			for(let j=0;j<4;j++)
-				this.flag[i][j] = false
+				this.numFlag[i][j] = false
 	}
 	// 有无剩余空间
 	noSpace() {
@@ -320,7 +322,7 @@ class Game {
 	}
 	// 动画：出现
 	animeA(i, j, n) {
-		let v = width / 25
+		let v = this.width / 25
 		let s = 0
 		let x, y, w
 		let cache = this.cache(n)
@@ -340,7 +342,7 @@ class Game {
 	}
 	// 动画：移动
 	animeB(x1, y1, x2, y2, n) {
-		let v = width / 25
+		let v = this.width / 25
 		let s = 0
 		let x = (1 + 6 * x1) * v
 		let y = (1 + 6 * y1) * v
@@ -363,7 +365,7 @@ class Game {
 	cache(value) {
 		let cacheCanvas = document.createElement('canvas')
 		let cacheCtx = cacheCanvas.getContext('2d')
-		let v = width / 25
+		let v = this.width / 25
 		cacheCanvas.width = 5 * v
 		cacheCanvas.height = 5 * v
 		cacheCtx.clearRect(0, 0, 5 * v, 5 * v)
@@ -431,11 +433,11 @@ class Game {
 	getFont(value) {
 		let s = ''
 		if (value <= 64)
-			s = width * 0.1 + 'px'
+			s = this.width * 0.1 + 'px'
 		else if (value <= 512)
-			s = width * 0.066 + 'px'
+			s = this.width * 0.066 + 'px'
 		else
-			s = width * 0.05 + 'px'
+			s = this.width * 0.05 + 'px'
 		s = 'bold ' + s + ' sans-serif'
 		return s
 	}
@@ -456,64 +458,59 @@ class Game {
 				this.cacheCtx.font = this.getFont(2)
 				this.cacheCtx.textAlign = 'center'
 				this.cacheCtx.textBaseline = 'middle'
-				this.cacheCtx.fillText('GAME OVER', width * 0.5, width * 0.5)
+				this.cacheCtx.fillText('GAME OVER', this.width * 0.5, this.width * 0.5)
 			}.bind(this), 600)
 		}
 	}
-}
-
-const game = new Game()
-game.start()
-
-// 事件
-function keyDown(e) {
-	if (!game.gameOver) {
+	// 事件处理
+	keyDown(e) {
+		if (this.gameOver)
+			return
 		if (e.keyCode == 38)
-			game.moveUp()
+			this.moveUp()
 		else if (e.keyCode == 40)
-			game.moveDown()
+			this.moveDown()
 		else if (e.keyCode == 37)
-			game.moveLeft()
+			this.moveLeft()
 		else if (e.keyCode == 39)
-			game.moveRight()
+			this.moveRight()
+		e.preventDefault()
+	}
+	touchstart(e) {
+		this.startX = e.touches[0].pageX
+		this.startY = e.touches[0].pageY
+	}
+	touchmove(e) {
+		if (this.gameOver)
+			return
+		e.preventDefault()
+		if (this.flag == 1)
+			return
+		let endX = e.touches[0].pageX
+		let endY = e.touches[0].pageY
+		let deltaX = endX - this.startX
+		let deltaY = endY - this.startY
+		if (Math.abs(deltaX) < 0.03 * this.width && Math.abs(deltaY) < 0.03 * this.width)
+			return
+		this.flag = 1
+		if (Math.abs(deltaX) >= Math.abs(deltaY)) {
+			if (deltaX > 0)
+				this.moveRight()
+			else
+				this.moveLeft()
+		} else {
+			if (deltaY > 0)
+				this.moveDown()
+			else
+				this.moveUp()
+		}
+	}
+	touchend(e) {
+		this.flag = 0
 	}
 }
-
-var startX = 0
-var startY = 0
-var flag = 0
-function touchstart(e) {
-	startX = e.touches[0].pageX
-	startY = e.touches[0].pageY
-}
-function touchmove(e) {
-	e.preventDefault()
-	if (flag == 1)
-		return
-	let endX = e.touches[0].pageX
-	let endY = e.touches[0].pageY
-	let deltaX = endX - startX
-	let deltaY = endY - startY
-	if (Math.abs(deltaX) < 0.03 * width && Math.abs(deltaY) < 0.03 * width)
-		return
-	flag = 1
-	if (Math.abs(deltaX) >= Math.abs(deltaY)) {
-		if (deltaX > 0)
-			game.moveRight()
-		else
-			game.moveLeft()
-	} else {
-		if (deltaY > 0)
-			game.moveDown()
-		else
-			game.moveUp()
-	}
-}
-function touchend(e) {
-	flag = 0
-}
-
-window.addEventListener('keydown', keyDown)
-gameFrame.addEventListener('touchstart', touchstart)
-gameFrame.addEventListener('touchmove', touchmove)
-gameFrame.addEventListener('touchend', touchend)
+// 程序入口
+const gameFrame = document.getElementById('gameFrame')
+const canvas = document.getElementById('canvas')
+const game = new Game(canvas, Math.floor(gameFrame.clientWidth / 25) * 25)
+game.start()

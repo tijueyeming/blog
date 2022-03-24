@@ -12,13 +12,13 @@ append body
 	.box
 		.cell-4.cell-m6.cell-s12.card
 			.box
-				.cell-4.board
+				.cell-4
 					| 分数：
 					span#score 0
-				.cell-4.board
+				.cell-4
 					| 等级：
 					span#level 1
-				button.cell-4.button(onclick='game.restart()') 重新开始
+				button.cell-4.button(onclick='game.start()') 重新开始
 	// 画布
 	.box
 		#gameFrame.cell-4.cell-m6.cell-s12
@@ -28,7 +28,7 @@ append body
 		.cell-4.cell-m6.cell-s12.card
 			.box
 				.word.cell-12
-					p 空格键暂停，R键重新开始，W/A/S/D或方向键控制方向。支持触屏操作。
+					p R键重新开始，W/A/S/D或方向键控制方向。支持触屏操作。
 				hr.hr.cell-12
 				.cell-8
 				.small.right.cell-4 2020-05-13 14:41:25
