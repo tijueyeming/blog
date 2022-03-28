@@ -66,7 +66,7 @@ class Game {
 		this.show()
 	}
 	show() {
-		this.ctx.clearRect(0, 0, canvas.width, canvas.height)
+		this.ctx.clearRect(0, 0, this.width, this.width)
 		this.ctx.drawImage(this.cacheCanvas, 0, 0)
 	}
 	cache() {
