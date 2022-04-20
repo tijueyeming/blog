@@ -5,11 +5,10 @@ const selectA = document.getElementById('selectA')
 const selectB = document.getElementById('selectB')
 const selectC = document.getElementById('selectC')
 const selectD = document.getElementById('selectD')
-const load = document.getElementById('load')
 var data = []
 var current = []
 
-load.onclick = function() {
+function load() {
 	let xhttp = new XMLHttpRequest()
 	xhttp.onreadystatechange = () => {
 		if (xhttp.readyState == 4) {

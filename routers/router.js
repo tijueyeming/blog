@@ -34,15 +34,6 @@ koa_router.post('/admin/deleteArticle', admin.postDeleteArticle)
 koa_router.get('/admin/editArticle/index/:page', admin.getArticleIndex)
 koa_router.get('/admin/editArticle/:id', admin.getEditArticle)
 koa_router.post('/admin/editArticle', admin.postEditArticle)
-// 发表游戏手册
-koa_router.get('/admin/createGame', admin.getCreateGame)
-koa_router.post('/admin/createGame', admin.postCreateGame)
-// 删除游戏手册
-koa_router.post('/admin/deleteGame', admin.postDeleteGame)
-// 编辑游戏手册
-koa_router.get('/admin/editGame/index/:page', admin.getGameIndex)
-koa_router.get('/admin/editGame/:id', admin.getEditGame)
-koa_router.post('/admin/editGame', admin.postEditGame)
 
 // 安规考试练习
 koa_router.get('/AnGuiKaoShi', AnGuiKaoShi.getHome)
@@ -51,6 +42,6 @@ koa_router.post('/AnGuiKaoShi/load', AnGuiKaoShi.postLoad)
 // 404
 koa_router.get('/404', c404.get404)
 // 默认跳转至404
-koa_router.get('*', c404.get404)
+koa_router.get('/(.*)', c404.get404)
 
 module.exports = koa_router

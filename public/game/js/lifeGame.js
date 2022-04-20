@@ -1,26 +1,16 @@
-/*规划布局*/
-const canvas = document.getElementById('canvas')
-const width = Math.floor(document.getElementById('gameFrame').clientWidth / 40) * 40
-canvas.width = width
-canvas.height = width
-const ctx = canvas.getContext('2d')
-
-/*细胞*/
+// 细胞
 class Cell {
-
-	constructor(x, y, alive) {
+	constructor(x, y, w, alive) {
 		this.x = x
 		this.y = y
-		this.w = width / 40
+		this.w = w
 		this.alive = alive
 		this.neighbors = 0
 	}
-
-	draw() {
+	show(ctx) {
 		ctx.fillStyle = this.setColor()
 		ctx.fillRect((this.x - 1) * this.w + 1, (this.y - 1) * this.w + 1, this.w -2, this.w - 2)
 	}
-
 	setColor() {
 		if (this.alive == 0) {
 			return 'white'
@@ -28,7 +18,6 @@ class Cell {
 			return 'red'
 		}
 	}
-	
 	evolution() {
 		if (this.alive == 0 && this.neighbors == 3)
 			this.alive = 1
@@ -36,20 +25,28 @@ class Cell {
 			this.alive = 0
 	}
 }
-
-/*生命游戏*/
+// 生命游戏
 class LifeGame {
-
-	constructor() {
-		this.cells = null
-	}
-	
-	init() {
+	constructor(canvas, width) {
 		this.cells = []
+		this.width = width
+		this.canvas = canvas
+		this.ctx = canvas.getContext('2d')
+		this.cacheCanvas = document.createElement("canvas")
+		this.cacheCtx = this.cacheCanvas.getContext("2d")
+		this.init()
+	}
+	init() {
+		this.canvas.width = this.width
+		this.canvas.height = this.width
+		this.cacheCanvas.width = this.width
+		this.cacheCanvas.height = this.width
+	}
+	start() {
 		for (let i = 0; i < 42; i++) {
 			this.cells[i] = []
 			for (let j = 0; j < 42; j++) {
-				this.cells[i][j] = new Cell(i, j, 0)
+				this.cells[i][j] = new Cell(i, j, this.width / 40, 0)
 			}
 		}
 		for (let i = 1; i < 41; i++) {
@@ -58,17 +55,16 @@ class LifeGame {
 					this.cells[i][j].alive = 1
 			}
 		}
-		this.draw()
+		this.show()
 	}
-	
-	draw() {
+	show() {
 		for (let i = 1; i < 41; i++) {
 			for (let j = 1; j < 41; j++) {
-				this.cells[i][j].draw()
+				this.cells[i][j].show(this.cacheCtx)
 			}
 		}
+		this.ctx.drawImage(this.cacheCanvas, 0, 0)
 	}
-	
 	evolution() {
 		let cache = []
 		for (let i = 1; i < 41; i++) {
@@ -83,13 +79,8 @@ class LifeGame {
 				this.cells[i][j].evolution()
 			}
 		}
-		this.draw()
+		this.show()
 	}
-	
-	start() {
-		this.init()
-	}
-	
 	importTemplate(index) {
 		for (let i = 0; i < 42; i++) {
 			for (let j = 0; j < 42; j++) {
@@ -110,15 +101,17 @@ class LifeGame {
 				this.quickSet([1,19,4,19,5,20,1,21,5,21,2,22,3,22,4,22,5,22])
 				break
 		}
-		this.draw()
+		this.show()
 	}
-	
 	quickSet(a) {
 		let l = a.length / 2
 		for (let i = 0; i < l; i++)
 			this.cells[a[2*i]][a[2*i+1]].alive = 1
 	}
 }
-
-var game = new LifeGame()
+// 程序入口
+const gameFrame = document.getElementById('gameFrame')
+const canvas = document.getElementById('canvas')
+// 开始游戏
+var game = new LifeGame(canvas, Math.floor(gameFrame.clientWidth / 40) * 40)
 game.start()

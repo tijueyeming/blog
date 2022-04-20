@@ -1,0 +1,26 @@
+doctype html
+
+html(lang='zh-CN')
+	head
+		meta(charset='UTF-8')
+		meta(name='viewport' content='width=device-width initial-scale=1')
+		block title
+			title 鶗鴂夜鸣
+		link(rel='icon' href='/home/img/avatar.png')
+		block css
+			link(rel='stylesheet' href='/home/css/layout.css')
+			link(rel='stylesheet' href='/home/css/style.css')
+
+	body
+		.header.box
+			.size32.color1.center.pointer.hover.cell-2.cell-m3.cell-s6(onclick="jump('/')") 鶗鴂夜鸣
+			.cell-7.cell-m5.cell-s0
+			.cell-3.cell-m4.cell-s6
+				.box
+					input#code.input.cell-5(placeholder='咒文' type='text')
+					.cell-1
+					button.button.cell-5(onclick='magic()') 施咒
+		block body
+
+		block js
+			script(src='/home/js/layout.js')

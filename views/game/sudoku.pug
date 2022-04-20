@@ -8,25 +8,21 @@ append body
 		.cell-4.cell-m6.cell-s12.card
 			.box
 				.big.bold.center.cell-12 #{title}
-	// 面板
 	.box
 		.cell-4.cell-m6.cell-s12
 			.box
-				button.cell-12.button(onclick='game.start()') 重新开始
-	// 画布
+				button.button.cell-12(onclick='game.start()') 重新开始
 	.box
 		#gameFrame.cell-4.cell-m6.cell-s12
 			canvas#canvas.canvas 天啦噜，您的浏览器版本不支持canvas标签！建议更换浏览器。
-	// 手册
 	.box
 		.cell-4.cell-m6.cell-s12.card
 			.box
-				.word.cell-12
-					p 点灯游戏！
-					p 点击任意方块可以使得自身及四周的方块改变状态，全部点亮所有方块后获胜。
+				.markdown.word.cell-12
+					p 普通的数独游戏，确保每个九宫格、每行、每列中没有相同数字。
 				hr.hr.cell-12
 				.cell-8
-				.small.right.cell-4 2020-06-12 17:43:00
+				.small.right.cell-4 2022-03-24 14:07
 
 append js
-	script(src='/game/js/lightUp.js')
+	script(src='/game/js/sudoku.js')

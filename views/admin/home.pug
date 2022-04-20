@@ -1,26 +1,10 @@
-extends layout.pug
+extends ../home/layout.pug
 
 append body
 	.box
 		.cell-4.cell-m6.cell-s12.card
 			.box
 				.cell-12.height
-				img.img.cell-4(src='/admin/img/articlesIcon.png' alt = 'articlesIcon')
-				.cell-4
-					.box
-						#editArticle.bigTitle.center.pointer.cell-12 修改日志
-						#createArticle.bigTitle.center.pointer.cell-12 创建日志
+				button.button.cell-12(onclick="jump('/admin/editArticle/index/1')") 修改日志
+				button.button.cell-12(onclick="jump('/admin/createArticle')") 创建日志
 				.cell-12.height
-	.box
-		.cell-4.cell-m6.cell-s12.card
-			.box
-				.cell-12.height
-				img.img.cell-4(src='/admin/img/gamesIcon.png' alt = 'gamesIcon')
-				.cell-4
-					.box
-						#editGame.bigTitle.center.pointer.cell-12 修改游戏
-						#createGame.bigTitle.center.pointer.cell-12 创建游戏
-				.cell-12.height
-
-append js
-	script(src='/admin/js/home.js')

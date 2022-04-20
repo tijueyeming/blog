@@ -22,10 +22,10 @@ async function getLogin(ctx) {
 }
 async function postLogin(ctx) {
 	console.log(`请求: ${JSON.stringify(ctx.request.body)}`)
-	let {name, pwd} = ctx.request.body
-	let user = await userModel.findUserByName(name)
+	let {uName, uPassword} = ctx.request.body
+	let user = await userModel.findUserByName(uName)
 	if (user) {
-		if (md5(pwd) === user.pwd) {
+		if (md5(uPassword) === user.uPassword) {
 			ctx.session = {id: user._id}
 			ctx.body = {
 				code: 200,
@@ -126,86 +126,6 @@ async function postEditArticle(ctx) {
 	console.log(`回复: ${JSON.stringify(ctx.body)}`)
 }
 
-// 游戏目录
-async function getGameIndex(ctx) {
-	await check.checkLogin(ctx)
-	let page = parseInt(ctx.params.page)
-	let amount = await gameModel.countGame()
-	let number = Math.ceil(amount / 10)
-	if ((page > 0 && page <= number) || (page == 1 && number == 0)) {
-		let games = await gameModel.findGameByPage(page)
-		await ctx.render('admin/gameIndex', {
-			session: ctx.session,
-			games: games,
-			amount: amount,
-			page: page,
-			number: number
-		})
-		console.log(`跳转至游戏目录页, page: ${page}`)
-	}
-	else {
-		ctx.redirect('/404')
-		console.log(`游戏目录页不存在, page: ${page}`)
-	}
-}
-// 发表游戏
-async function getCreateGame(ctx) {
-	await check.checkLogin(ctx)
-	await ctx.render('admin/createGame', {
-		session: ctx.session
-	})
-	console.log('转至创建游戏页面')
-}
-async function postCreateGame(ctx) {
-	console.log(`请求: ${JSON.stringify(ctx.request.body)}`)
-	let {title, code, markdown} = ctx.request.body
-	let time = moment().format('YYYY-MM-DD HH:mm:ss')
-	await gameModel.addGame(title, code, markdown, time)
-	ctx.body = {
-		code:200,
-		message:'发表成功'
-	}
-	console.log(`回复: ${JSON.stringify(ctx.body)}`)
-}
-// 删除游戏
-async function postDeleteGame(ctx) {
-	console.log(`请求: ${JSON.stringify(ctx.request.body)}`)
-	let {id} = ctx.request.body
-	await gameModel.deleteGameById(id)
-	ctx.body = {
-		code: 200,
-		message: '删除成功'
-	}
-	console.log(`回复: ${JSON.stringify(ctx.body)}`)
-}
-// 编辑游戏
-async function getEditGame(ctx) {
-	await check.checkLogin(ctx)
-	let id = ctx.params.id
-	let game = await gameModel.findGameById(id)
-	if (game) {
-		await ctx.render('admin/editGame', {
-			session: ctx.session,
-			game: game
-		})
-		console.log(`跳转至游戏编辑页, 标题：${game.title}, id：${id}`)
-	}
-	else {
-		ctx.redirect('/admin')
-		console.log(`要编辑的游戏不存在，跳转至游戏目录，id：${id}`)
-	}
-}
-async function postEditGame(ctx) {
-	console.log(`请求: ${JSON.stringify(ctx.request.body)}`)
-	let {id, title, code, markdown, moment} = ctx.request.body
-	await gameModel.updateGame(id, title, code, markdown, moment)
-	ctx.body = {
-		code: 200,
-		message: '发表成功'
-	}
-	console.log(`回复: ${JSON.stringify(ctx.body)}`)
-}
-
 exports.getHome = getHome
 exports.getLogin = getLogin
 exports.postLogin = postLogin
@@ -215,9 +135,3 @@ exports.postCreateArticle = postCreateArticle
 exports.postDeleteArticle = postDeleteArticle
 exports.getEditArticle = getEditArticle
 exports.postEditArticle = postEditArticle
-exports.getGameIndex = getGameIndex
-exports.getCreateGame = getCreateGame
-exports.postCreateGame = postCreateGame
-exports.postDeleteGame = postDeleteGame
-exports.getEditGame = getEditGame
-exports.postEditGame = postEditGame

@@ -1,5 +1,4 @@
 const gameModel = require('../models/gameModel.js')
-const md = require('markdown-it')({html: true})
 
 // 游戏目录
 async function getIndex(ctx) {
@@ -29,8 +28,6 @@ async function getGame(ctx) {
 		await ctx.render(`game/${game.code}`, {
 			title: game.title,
 			code: game.code,
-			manual: md.render(game.markdown),
-			moment: game.moment
 		})
 		console.log(`跳转至游戏页, 标题：${game.title}, id：${id}`)
 	}
